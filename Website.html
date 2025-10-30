@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sammy Kings — Reliable Computer Experts | Sales • Repairs • Networking</title>
+  <meta name="description" content="Buy laptops, accessories, and book repairs from the comfort of your home. Fast pickup & delivery." />
+  <meta property="og:title" content="Sammy Kings — Reliable Computer Experts" />
+  <meta property="og:description" content="Buy laptops & accessories, book fast repairs, and get pro IT support." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
+    .glass { backdrop-filter: saturate(180%) blur(8px); background: rgba(255,255,255,0.65); }
+    .shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <style>
+    /* subtle reveal animation on scroll */
+    .reveal { opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.show { opacity: 1; transform: none; }
+  </style>
+  <!-- ===== Config (EDIT THESE) ===== -->
+  <script>
+    const SHOP = {
+      name: "SAMMY KINGS COMPUTER TECHNOLOGY LTD",
+      tagline: "Computers • Accessories • Repairs",
+      address: "12 Example Street, City, State",
+      hours: "Mon–Sat: 9:00–18:00",
+      whatsapp: "+2348012345678", // include country code, no spaces
+      email: "hello@yourshop.com",
+      city: "Your City",
+      logo: "", // paste a direct image URL to use a real logo (PNG/SVG/JPG). Leave empty to use text.
+      heroBg: "" // paste a direct image URL of the shop signpost/background. Leave empty to keep default.
+    };
+
+    // Starter products — edit freely or add more
+    const PRODUCTS = [
+      { id: "p1", name: "HP Laptop 14", price: 385000, badge: "Hot", imgs: [
+        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop"
+      ], desc: "Intel i5 • 8GB • 256GB SSD • Win 11" },
+      { id: "p2", name: "Dell Inspiron 15", price: 465000, badge: "New", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop", desc: "Ryzen 5 • 16GB • 512GB SSD" },
+      { id: "p3", name: "Logitech Wireless Mouse", price: 10500, img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=1200&auto=format&fit=crop", desc: "Silent clicks • 2.4GHz" },
+      { id: "p4", name: "Samsung 1TB SSD", price: 89000, img: "https://images.unsplash.com/photo-1600369672770-38574f2e8a2b?q=80&w=1200&auto=format&fit=crop", desc: "NVMe Gen3 • 3500MB/s" },
+      { id: "p5", name: "Anker Power Bank 20k", price: 32000, img: "https://images.unsplash.com/photo-1589753589153-cb2fda9f8a8d?q=80&w=1200&auto=format&fit=crop", desc: "Fast charge • USB-C" },
+      { id: "p6", name: "Apple AirPods Pro", price: 195000, img: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=1200&auto=format&fit=crop", desc: "ANC • Spatial audio" },
+    ];
+
+    // Laptop brands/models for repair form (edit/add more)
+    const LAPTOPS = {
+      "HP": [
+        { model: "Pavilion 14", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop", specs: "i5 • 8GB • 256GB" },
+        { model: "Pavilion 15", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "i7 • 16GB • 512GB" },
+        { model: "Envy 13", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", specs: "i5 • 8GB • 512GB" },
+        { model: "Envy 15", img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=800&auto=format&fit=crop", specs: "i7 • 16GB • 512GB" },
+        { model: "Spectre x360 13", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop", specs: "i7 • 16GB • 512GB" },
+        { model: "Spectre x360 14", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "i7 • 16GB • 1TB" },
+        { model: "ProBook 450", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", specs: "i5 • 8GB • 256GB" },
+        { model: "EliteBook 840", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", specs: "i7 • 16GB • 512GB" },
+        { model: "Victus 15", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "Ryzen 5 • 16GB • 512GB" },
+        { model: "Omen 16", img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=800&auto=format&fit=crop", specs: "i7/RTX • 16GB • 1TB" }
+      ],
+      "Dell": [
+        { model: "Inspiron 14", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "i5 • 8GB • 256GB" },
+        { model: "Inspiron 15", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "Ryzen 5 • 8GB • 512GB" },
+        { model: "XPS 13", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop", specs: "i7 • 16GB • 512GB" },
+        { model: "XPS 15", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop", specs: "i7/RTX • 16GB • 1TB" },
+        { model: "Latitude 5420", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", specs: "i5 • 16GB • 256GB" },
+        { model: "Latitude 7400", img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=800&auto=format&fit=crop", specs: "i7 • 16GB • 512GB" },
+        { model: "Vostro 3500", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "i3 • 8GB • 256GB" },
+        { model: "G15 Gaming", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "Ryzen 7/RTX • 16GB • 512GB" }
+      ],
+      "Lenovo": [
+        { model: "ThinkPad T14", img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=800&auto=format&fit=crop", specs: "i5 • 16GB • 512GB" },
+        { model: "ThinkPad X1 Carbon", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop", specs: "i7 • 16GB • 512GB" },
+        { model: "ThinkPad T490", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", specs: "i5 • 16GB • 512GB" },
+        { model: "IdeaPad 3", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "i3 • 8GB • 256GB" },
+        { model: "IdeaPad 5", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "Ryzen 5 • 16GB • 512GB" },
+        { model: "Yoga 7", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop", specs: "i7 • 16GB • 512GB" },
+        { model: "Yoga 9", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", specs: "i7 • 32GB • 1TB" },
+        { model: "Legion 5 Pro", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "Ryzen 7/RTX • 16GB • 1TB" },
+        { model: "ThinkBook 14", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", specs: "i5 • 8GB • 512GB" }
+      ],
+      "Apple": [
+        { model: "MacBook Air 13 (M1)", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop", specs: "8‑core • 8GB • 256GB" },
+        { model: "MacBook Air 13 (M2)", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", specs: "8‑core • 8GB • 256/512GB" },
+        { model: "MacBook Air 15 (M2)", img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=800&auto=format&fit=crop", specs: "8‑core • 8/16GB • 256/512GB" },
+        { model: "MacBook Pro 13 (M2)", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop", specs: "10‑core • 8/16GB • 256/512GB" },
+        { model: "MacBook Pro 14 (M2)", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", specs: "M2 Pro • 16GB • 512GB" },
+        { model: "MacBook Pro 16 (M2)", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "M2 Pro/Max • 16/32GB • 1TB" }
+      ],
+      "Alienware": [
+        { model: "m15 R7", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "i7/RTX • 16GB • 1TB" },
+        { model: "m16", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", specs: "Ryzen 7/RTX • 16GB • 1TB" },
+        { model: "x14", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop", specs: "i7/RTX • 16GB • 1TB" },
+        { model: "x16", img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=800&auto=format&fit=crop", specs: "i9/RTX • 32GB • 1TB" }
+      ],
+      "Toshiba": [
+        { model: "Satellite C55", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", specs: "i3 • 8GB • 256GB" },
+        { model: "Satellite Pro A50", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", specs: "i5 • 8GB • 256GB" },
+        { model: "Tecra Z40", img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop", specs: "i5 • 8GB • 256GB" },
+        { model: "Portege X30", img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=800&auto=format&fit=crop", specs: "i7 • 16GB • 512GB" }
+      ]
+    };
+  </script>
+
+  <!-- ===== Navbar ===== -->
+  <header class="sticky top-0 z-50 glass border-b border-white/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#home" class="flex items-center gap-2">
+          <div id="logoWrap" class="w-9 h-9 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 grid place-items-center text-white font-extrabold overflow-hidden">
+            <span id="logoText">CE</span>
+            <img id="logoImg" class="hidden w-full h-full object-cover" alt="logo" />
+          </div>
+          <div>
+            <div id="brand" class="font-extrabold text-lg">YOUR SHOP NAME</div>
+            <div id="tagline" class="text-xs -mt-1 text-gray-600">Computers • Accessories • Repairs</div>
+          </div>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="#products" class="hover:text-blue-600">Products</a>
+          <a href="#services" class="hover:text-blue-600">Services</a>
+          <a href="#repairs" class="hover:text-blue-600">Book Repair</a>
+          <a href="#contact" class="hover:text-blue-600">Contact</a>
+          <button id="openCart" class="relative inline-flex items-center gap-2 rounded-2xl px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 shadow-soft">
+            <span>Cart</span>
+            <span id="cartCount" class="text-xs bg-white text-blue-700 rounded-full px-2 py-0.5">0</span>
+          </button>
+        </nav>
+        <button id="openCartSm" class="md:hidden inline-flex items-center gap-2 rounded-2xl px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 shadow-soft">
+          Cart <span id="cartCountSm" class="text-xs bg-white text-blue-700 rounded-full px-2 py-0.5">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section id="home" class="relative overflow-hidden">
+    <div id="heroBg" class="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50"></div>
+    <div class="absolute inset-0 pointer-events-none" id="heroOverlay"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+            Reliable Computer Experts
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600">Sales • Repairs • Networking</span>
+          </h1>
+          <p class="mt-4 text-gray-600 text-lg">Buy laptops & accessories online, book fast repairs, and get professional IT support. Pickup & delivery available across the city.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#products" class="px-5 py-3 rounded-2xl bg-blue-600 text-white hover:bg-blue-700 shadow-soft">Shop Now</a>
+            <a href="#repairs" class="px-5 py-3 rounded-2xl bg-white border hover:bg-gray-50 shadow-soft">Book a Repair</a>
+          </div>
+          <div id="shopMeta" class="mt-6 text-sm text-gray-500"></div>
+        </div>
+        <div class="relative">
+          <img id="heroImage" class="rounded-3xl shadow-soft" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" alt="Computers & electronics" />
+          <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-soft p-4 border">
+            <div class="font-semibold">Pickup & Delivery</div>
+            <div class="text-sm text-gray-600">We come to you in <span id="cityA">your city</span>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Products ===== -->
+  <section id="products" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="flex items-end justify-between">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-extrabold">Popular Products</h2>
+        <p class="text-gray-600">Add to cart and checkout via WhatsApp in seconds.</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="text-sm text-gray-500 hidden sm:block">Prices in NGN</div>
+        <div class="relative">
+          <input id="productSearch" type="search" placeholder="Search laptops & accessories…"
+                 class="w-56 sm:w-72 px-3 py-2 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none" />
+          <div id="suggestions" class="absolute z-10 mt-1 w-full bg-white border rounded-xl shadow-soft max-h-64 overflow-auto hidden"></div>
+        </div>
+      </div>
+    </div>
+    <div id="productGrid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 reveal"></div>
+
+    <!-- Product Gallery Modal -->
+    <div id="galleryModal" class="fixed inset-0 hidden">
+      <div id="galleryBackdrop" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity"></div>
+      <div class="absolute inset-0 grid place-items-center">
+        <div class="w-[92vw] max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden scale-95 opacity-0 transition-all" id="galleryCard">
+          <div class="flex items-center justify-between px-4 py-3 border-b">
+            <div class="font-semibold" id="galleryTitle">Product</div>
+            <button id="galleryClose" class="text-gray-600 hover:text-gray-900">✕</button>
+          </div>
+          <div class="p-4 grid gap-4">
+            <div class="relative w-full aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden">
+              <img id="galleryImage" class="w-full h-full object-cover" alt="Product image" />
+              <button id="prevImg" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full px-3 py-1 border">‹</button>
+              <button id="nextImg" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full px-3 py-1 border">›</button>
+            </div>
+            <div id="thumbs" class="flex gap-2 overflow-auto"></div>
+            <div class="flex items-center justify-between">
+              <div class="text-xl font-bold" id="galleryPrice">₦0</div>
+              <button id="galleryAdd" class="px-5 py-2 rounded-xl bg-gray-900 text-white hover:bg-black">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Services ===== -->
+  <section id="services" class="bg-white border-y">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-2xl md:text-3xl font-extrabold">Services</h2>
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="p-6 rounded-2xl border shadow-soft bg-gradient-to-br from-gray-50 to-white">
+          <h3 class="font-bold text-lg">Laptop Sales & Accessories</h3>
+          <p class="text-gray-600 mt-2">New & UK-used laptops, printers, routers, genuine accessories.</p>
+        </div>
+        <div class="p-6 rounded-2xl border shadow-soft bg-gradient-to-br from-gray-50 to-white">
+          <h3 class="font-bold text-lg">Repairs & Upgrades</h3>
+          <p class="text-gray-600 mt-2">Screens, batteries, keyboards, SSD/RAM, OS & data recovery.</p>
+        </div>
+        <div class="p-6 rounded-2xl border shadow-soft bg-gradient-to-br from-gray-50 to-white">
+          <h3 class="font-bold text-lg">Networking & IT Setup</h3>
+          <p class="text-gray-600 mt-2">Wi‑Fi, CCTV, POS, office IT support & maintenance contracts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Repairs (WhatsApp form) ===== -->
+  <section id="why" class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-2xl md:text-3xl font-extrabold">Why Choose Sammy Kings</h2>
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="p-6 rounded-2xl border shadow-soft">
+          <div class="font-bold">Trusted Expertise</div>
+          <p class="text-gray-600 mt-2">Experienced technicians and genuine parts.</p>
+        </div>
+        <div class="p-6 rounded-2xl border shadow-soft">
+          <div class="font-bold">Fast Turnaround</div>
+          <p class="text-gray-600 mt-2">Same‑day diagnostics, clear timelines.</p>
+        </div>
+        <div class="p-6 rounded-2xl border shadow-soft">
+          <div class="font-bold">Pickup & Delivery</div>
+          <p class="text-gray-600 mt-2">Convenient service across the city.</p>
+        </div>
+        <div class="p-6 rounded-2xl border shadow-soft">
+          <div class="font-bold">Warranty & Support</div>
+          <p class="text-gray-600 mt-2">Warranty on repairs and after‑sales support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="repairs" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <h2 class="text-2xl md:text-3xl font-extrabold">Book a Repair</h2>
+    <p class="text-gray-600">Fill this form and we’ll confirm pickup via WhatsApp.</p>
+
+    <form id="repairForm" class="mt-6 grid gap-4 bg-white p-6 rounded-2xl border shadow-soft">
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label class="text-sm font-medium">Full Name</label>
+          <input required name="name" class="w-full mt-1 px-3 py-2 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Jane Doe" />
+        </div>
+        <div>
+          <label class="text-sm font-medium">Phone Number</label>
+          <input required name="phone" class="w-full mt-1 px-3 py-2 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none" placeholder="0801 234 5678" />
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label class="text-sm font-medium">Device Type</label>
+          <select id="deviceType" name="device" class="w-full mt-1 px-3 py-2 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none">
+            <option>Laptop</option>
+            <option>Desktop</option>
+            <option>Accessory</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm font-medium">Preferred Date</label>
+          <input type="date" name="date" class="w-full mt-1 px-3 py-2 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none" />
+        </div>
+      </div>
+
+      <!-- Laptop conditional fields -->
+      <div id="laptopExtras" class="hidden grid gap-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm font-medium">Laptop Brand</label>
+            <select id="laptopBrand" class="w-full mt-1 px-3 py-2 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none"></select>
+          </div>
+          <div>
+            <label class="text-sm font-medium">Model / Series</label>
+            <select id="laptopModel" class="w-full mt-1 px-3 py-2 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none"></select>
+          </div>
+        </div>
+        <div id="laptopPreview" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-4 items-center border rounded-xl p-4">
+          <img id="laptopImg" class="w-full h-36 object-cover rounded-xl" alt="Selected laptop" />
+          <div class="sm:col-span-2">
+            <div class="font-semibold" id="laptopTitle">—</div>
+            <div class="text-sm text-gray-600" id="laptopSpecs">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label class="text-sm font-medium">Issue Description</label>
+        <textarea required name="issue" rows="3" class="w-full mt-1 px-3 py-2 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Screen cracked, not charging, slow, etc."></textarea>
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="px-5 py-3 rounded-2xl bg-blue-600 text-white hover:bg-blue-700 shadow-soft" type="submit">Send via WhatsApp</button>
+        <div class="text-sm text-gray-500">We reply within business hours.</div>
+      </div>
+    </form>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="about" class="bg-white border-t">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-extrabold">About Sammy Kings</h2>
+        <p class="mt-4 text-gray-700 leading-relaxed">Founded in Port Harcourt, Sammy Kings Computer Technology Ltd provides reliable computer sales, professional repairs, and network solutions for homes and businesses. Our mission is simple: quality devices, expert service, and honest support.</p>
+        <ul class="mt-6 space-y-2 text-gray-700 list-disc pl-5">
+          <li>Genuine products with warranty</li>
+          <li>Transparent repair process</li>
+          <li>Business IT support and maintenance</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border shadow-soft overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?q=80&w=1600&auto=format&fit=crop" alt="About Sammy Kings" />
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="bg-white border-t">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-extrabold">Contact & Store Info</h2>
+        <ul class="mt-4 space-y-2 text-gray-700">
+          <li><strong>Address:</strong> <span id="addr">—</span></li>
+          <li><strong>Hours:</strong> <span id="hours">—</span></li>
+          <li><strong>WhatsApp:</strong> <a id="wa" class="text-blue-600 underline" target="_blank" rel="noreferrer">Chat now</a></li>
+          <li><strong>Email:</strong> <a id="em" class="text-blue-600 underline" target="_blank" rel="noreferrer"></a></li>
+        </ul>
+        <div class="mt-6 text-sm text-gray-500">Pickup & delivery available in <span id="cityB">your city</span>.</div>
+      </div>
+      <div class="rounded-2xl border shadow-soft overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1527443224154-c4f2a9c6c3ab?q=80&w=1600&auto=format&fit=crop" alt="Store" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="border-t">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-sm text-gray-600 flex flex-wrap items-center justify-between gap-4">
+      <div>© <span id="year"></span> <span id="brandF">YOUR SHOP NAME</span>. All rights reserved.</div>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-gray-900">Privacy</a>
+        <a href="#" class="hover:text-gray-900">Warranty</a>
+        <a href="#" class="hover:text-gray-900">Returns</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Cart Drawer ===== -->
+  <div id="cartDrawer" class="fixed inset-0 hidden">
+    <div class="absolute inset-0 bg-black/40" id="closeCart"></div>
+    <aside class="absolute right-0 top-0 h-full w-full sm:w-[420px] bg-white shadow-2xl p-6 flex flex-col">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold">Your Cart</h3>
+        <button id="closeCartBtn" class="text-gray-500 hover:text-gray-900">✕</button>
+      </div>
+      <div id="cartItems" class="mt-4 flex-1 overflow-auto space-y-4"></div>
+      <div class="border-t pt-4 space-y-3">
+        <div class="flex items-center justify-between font-semibold">
+          <span>Total</span>
+          <span id="cartTotal">₦0</span>
+        </div>
+        <button id="whatsCheckout" class="w-full px-5 py-3 rounded-2xl bg-blue-600 text-white hover:bg-blue-700 shadow-soft">Checkout via WhatsApp</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ===== Scripts ===== -->
+  <script>
+    // Helpers
+    const fmt = (n) => `₦${n.toLocaleString()}`;
+    const waLink = (text) => `https://wa.me/${SHOP.whatsapp.replace(/\D/g, "")}??text=${encodeURIComponent(text)}`.replace("??","?");
+
+    // Init shop meta
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('brand').textContent = SHOP.name;
+      document.getElementById('brandF').textContent = SHOP.name;
+      document.getElementById('tagline').textContent = SHOP.tagline;
+      document.getElementById('addr').textContent = SHOP.address;
+      document.getElementById('hours').textContent = SHOP.hours;
+      document.getElementById('wa').href = waLink(`Hello ${SHOP.name}, I need help.`);
+      document.getElementById('em').href = `mailto:${SHOP.email}`;
+      document.getElementById('em').textContent = SHOP.email;
+      document.getElementById('cityA').textContent = SHOP.city;
+      document.getElementById('cityB').textContent = SHOP.city;
+      document.getElementById('year').textContent = new Date().getFullYear();
+      document.getElementById('shopMeta').textContent = `${SHOP.address} • ${SHOP.hours}`;
+
+      // Logo swap
+      const logoImg = document.getElementById('logoImg');
+      const logoText = document.getElementById('logoText');
+      if (SHOP.logo) {
+        logoImg.src = SHOP.logo;
+        logoImg.classList.remove('hidden');
+        logoText.classList.add('hidden');
+      }
+
+      // Hero background using shop signpost if provided
+      if (SHOP.heroBg) {
+        const hero = document.getElementById('heroBg');
+        hero.style.backgroundImage = `url(${SHOP.heroBg})`;
+        hero.style.backgroundSize = 'cover';
+        hero.style.backgroundPosition = 'center';
+        const overlay = document.getElementById('heroOverlay');
+        overlay.style.background = 'linear-gradient(to bottom right, rgba(0,0,0,0.35), rgba(0,0,0,0.15))';
+        const heroImg = document.getElementById('heroImage');
+        heroImg.classList.add('hidden');
+      }
+
+      // Populate laptop brand/model selects
+      const brandSel = document.getElementById('laptopBrand');
+      const modelSel = document.getElementById('laptopModel');
+      brandSel.innerHTML = Object.keys(LAPTOPS).map(b => `<option>${b}</option>`).join('');
+      function refreshModels() {
+        const b = brandSel.value;
+        const list = LAPTOPS[b] || [];
+        modelSel.innerHTML = list.map(m => `<option>${m.model}</option>`).join('');
+        if (list.length) showLaptopPreview(b, list[0].model);
+      }
+      brandSel.addEventListener('change', refreshModels);
+      modelSel.addEventListener('change', () => showLaptopPreview(brandSel.value, modelSel.value));
+      refreshModels();
+    });
+
+    // Render products
+    const grid = document.getElementById('productGrid');
+    function primaryImg(p){ return (p.imgs && p.imgs[0]) || p.img; }
+    function renderProducts(list = PRODUCTS) {
+      const data = Array.isArray(list) ? list : PRODUCTS;
+      grid.innerHTML = data.length
+        ? data.map(p => `
+        <div class=\"group bg-white rounded-2xl border shadow-soft overflow-hidden flex flex-col transition duration-300 hover:-translate-y-0.5 hover:shadow-xl\">
+          <div class=\"relative\">
+            <img loading=\"lazy\" src=\"${primaryImg(p)}\" alt=\"${p.name}\" class=\"h-52 w-full object-cover group-hover:scale-[1.02] transition\" />
+            ${p.badge ? `<span class=\\"absolute top-3 left-3 px-2 py-0.5 text-xs rounded-full bg-blue-600 text-white\\">${p.badge}</span>` : ''}
+            <button data-id=\"${p.id}\" class=\"openGallery absolute bottom-3 right-3 px-3 py-1.5 text-xs rounded-lg bg-white/90 border hover:bg-white\">View</button>
+          </div>
+          <div class=\"p-5 flex-1 flex flex-col\">
+            <div class=\"font-bold\">${p.name}</div>
+            <div class=\"text-sm text-gray-600 mt-1\">${p.desc || ''}</div>
+            <div class=\"mt-auto flex items-center justify-between pt-4\">
+              <div class=\"font-extrabold\">${fmt(p.price)}</div>
+              <div class=\"flex gap-2\">
+                <button data-id=\"${p.id}\" class=\"openGallery px-3 py-2 rounded-xl border bg-white hover:bg-gray-50\">Preview</button>
+                <button data-id=\"${p.id}\" class=\"addToCart px-4 py-2 rounded-xl bg-gray-900 text-white hover:bg-black\">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('')
+        : '<div class=\"col-span-full text-gray-500\">No products found.</div>';
+
+      document.querySelectorAll('.addToCart').forEach(btn => btn.addEventListener('click', () => addToCart(btn.dataset.id)));
+      document.querySelectorAll('.openGallery').forEach(btn => btn.addEventListener('click', () => openGallery(btn.dataset.id)));
+    }
+
+    // Cart state
+    let cart = JSON.parse(localStorage.getItem('cart') || '{}');
+    const saveCart = () => localStorage.setItem('cart', JSON.stringify(cart));
+    const countCart = () => Object.values(cart).reduce((a,b)=>a+b.qty, 0);
+    const sumCart = () => Object.values(cart).reduce((a,b)=>a + b.qty*b.price, 0);
+
+    function addToCart(id) {
+      const prod = PRODUCTS.find(p => p.id === id);
+      if (!prod) return;
+      if (!cart[id]) cart[id] = { id: prod.id, name: prod.name, price: prod.price, qty: 0 };
+      cart[id].qty += 1;
+      saveCart();
+      updateCartUI();
+      openCart();
+    }
+
+    function removeFromCart(id) {
+      delete cart[id];
+      saveCart();
+      updateCartUI();
+    }
+
+    // Search filtering (by name/description)
+    const searchEl = document.getElementById('productSearch');
+    function runSearch() {
+      const q = (searchEl?.value || '').trim().toLowerCase();
+      if (!q) return renderProducts(PRODUCTS);
+      const filtered = PRODUCTS.filter(p => [p.name, p.desc].filter(Boolean).join(' ').toLowerCase().includes(q));
+      renderProducts(filtered);
+    }
+    if (searchEl) {
+      searchEl.addEventListener('input', runSearch);
+      searchEl.addEventListener('keydown', (e) => { if (e.key === 'Escape') { searchEl.value=''; renderProducts(PRODUCTS); }});
+    }
+
+    // Autocomplete suggestions from laptop brand/models
+    const SUGGEST_SRC = Object.entries(LAPTOPS).flatMap(([brand, arr]) =>
+      arr.map(m => ({ label: `${brand} ${m.model}`, brand, model: m.model }))
+    );
+    const sugBox = document.getElementById('suggestions');
+    let sugIndex = -1; let sugVisible = false;
+    function hideSuggestions(){ if (!sugBox) return; sugBox.classList.add('hidden'); sugVisible=false; sugIndex=-1; }
+    function showSuggestions(q){
+      if (!sugBox) return;
+      const term = (q||'').trim().toLowerCase();
+      if (!term){ hideSuggestions(); return; }
+      const matches = SUGGEST_SRC.filter(x => x.label.toLowerCase().includes(term)).slice(0,12);
+      if (!matches.length){ hideSuggestions(); return; }
+      sugBox.innerHTML = matches.map((x,i)=>
+        `<button type="button" class="w-full text-left px-3 py-2 hover:bg-gray-50 ${i===0?'rounded-t-xl':''} ${i===matches.length-1?'rounded-b-xl':''}" data-label="${x.label}">${x.label}</button>`
+      ).join('');
+      sugBox.classList.remove('hidden');
+      sugVisible = true; sugIndex = -1;
+      Array.from(sugBox.querySelectorAll('button')).forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          searchEl.value = btn.dataset.label;
+          runSearch();
+          hideSuggestions();
+        });
+      });
+    }
+    if (searchEl){
+      searchEl.addEventListener('input', ()=>{ showSuggestions(searchEl.value); });
+      searchEl.addEventListener('keydown', (e)=>{
+        if (!sugVisible) return;
+        const items = Array.from(sugBox.querySelectorAll('button'));
+        if (!items.length) return;
+        if (e.key === 'ArrowDown'){ e.preventDefault(); sugIndex = (sugIndex+1)%items.length; items.forEach((b,i)=>b.classList.toggle('bg-gray-100', i===sugIndex)); }
+        else if (e.key === 'ArrowUp'){ e.preventDefault(); sugIndex = (sugIndex-1+items.length)%items.length; items.forEach((b,i)=>b.classList.toggle('bg-gray-100', i===sugIndex)); }
+        else if (e.key === 'Enter'){ if (sugIndex>=0){ e.preventDefault(); items[sugIndex].click(); } }
+      });
+      document.addEventListener('click', (e)=>{ if (sugBox && !sugBox.contains(e.target) && e.target!==searchEl) hideSuggestions(); });
+    }
+
+    function openCart(){ drawer.classList.remove('hidden'); }
+    function closeCart(){ drawer.classList.add('hidden'); }
+
+    document.getElementById('openCart').addEventListener('click', openCart);
+    document.getElementById('openCartSm').addEventListener('click', openCart);
+    document.getElementById('closeCart').addEventListener('click', closeCart);
+    document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+
+    document.getElementById('whatsCheckout').addEventListener('click', () => {
+      const items = Object.values(cart);
+      if (!items.length) return alert('Your cart is empty.');
+      const lines = [
+        `NEW ORDER — ${SHOP.name}`,
+        '',
+        ...items.map(i => `• ${i.name} × ${i.qty} — ${fmt(i.price * i.qty)}`),
+        '',
+        `TOTAL: ${fmt(sumCart())}`,
+        '',
+        'Name:',
+        'Address:',
+        'Landmark:',
+        'Phone:'
+      ];
+      window.open(waLink(lines.join('\n')), '_blank');
+    });
+
+    // ===== Gallery Modal Logic =====
+    const gModal = document.getElementById('galleryModal');
+    const gBackdrop = document.getElementById('galleryBackdrop');
+    const gCard = document.getElementById('galleryCard');
+    const gTitle = document.getElementById('galleryTitle');
+    const gImage = document.getElementById('galleryImage');
+    const gThumbs = document.getElementById('thumbs');
+    const gPrice = document.getElementById('galleryPrice');
+    const gAdd = document.getElementById('galleryAdd');
+    const gClose = document.getElementById('galleryClose');
+    const prevBtn = document.getElementById('prevImg');
+    const nextBtn = document.getElementById('nextImg');
+    let gProd = null; let gIdx = 0;
+
+    function openGallery(id){
+      gProd = PRODUCTS.find(p=>p.id===id);
+      if (!gProd) return;
+      gIdx = 0;
+      gTitle.textContent = gProd.name;
+      gPrice.textContent = fmt(gProd.price);
+      const imgs = gProd.imgs || [gProd.img];
+      renderGalleryImage();
+      gThumbs.innerHTML = imgs.map((src,i)=>`<button class=\"border rounded-lg overflow-hidden\"><img data-i=\"${i}\" src=\"${src}\" class=\"w-20 h-14 object-cover\"></button>`).join('');
+      Array.from(gThumbs.querySelectorAll('img')).forEach(im=>im.addEventListener('click',()=>{gIdx=Number(im.dataset.i);renderGalleryImage();}));
+      gAdd.onclick = ()=> addToCart(gProd.id);
+      // show modal with animation
+      gModal.classList.remove('hidden');
+      requestAnimationFrame(()=>{
+        gBackdrop.classList.remove('opacity-0');
+        gCard.classList.remove('opacity-0','scale-95');
+      });
+    }
+    function renderGalleryImage(){
+      const imgs = gProd.imgs || [gProd.img];
+      gImage.src = imgs[gIdx] || imgs[0];
+    }
+    function closeGallery(){
+      gBackdrop.classList.add('opacity-0');
+      gCard.classList.add('opacity-0','scale-95');
+      setTimeout(()=> gModal.classList.add('hidden'), 180);
+    }
+    gClose.addEventListener('click', closeGallery);
+    gBackdrop.addEventListener('click', closeGallery);
+    prevBtn.addEventListener('click', ()=>{ const imgs=gProd.imgs||[gProd.img]; gIdx=(gIdx-1+imgs.length)%imgs.length; renderGalleryImage(); });
+    nextBtn.addEventListener('click', ()=>{ const imgs=gProd.imgs||[gProd.img]; gIdx=(gIdx+1)%imgs.length; renderGalleryImage(); });
+    document.addEventListener('keydown', (e)=>{ if(gModal.classList.contains('hidden')) return; if(e.key==='Escape') closeGallery(); if(e.key==='ArrowLeft') prevBtn.click(); if(e.key==='ArrowRight') nextBtn.click(); });
+
+    // Repair form → WhatsApp
+    const deviceTypeSel = document.getElementById('deviceType');
+    const laptopExtras = document.getElementById('laptopExtras');
+    function toggleLaptopExtras() {
+      const isLaptop = (deviceTypeSel.value === 'Laptop');
+      laptopExtras.classList.toggle('hidden', !isLaptop);
+      document.getElementById('laptopPreview').classList.toggle('hidden', !isLaptop);
+    }
+    deviceTypeSel.addEventListener('change', toggleLaptopExtras);
+    toggleLaptopExtras();
+
+    function showLaptopPreview(brand, model) {
+      const item = (LAPTOPS[brand] || []).find(x => x.model === model);
+      if (!item) return;
+      document.getElementById('laptopImg').src = item.img;
+      document.getElementById('laptopTitle').textContent = `${brand} ${item.model}`;
+      document.getElementById('laptopSpecs').textContent = item.specs || '';
+    }
+
+    document.getElementById('repairForm').addEventListener('submit', (e) => {
+     e.preventDefault();
+     const f = e.target;
+     const name = f.name.value;
+     const phone = f.phone.value;
+     const device = f.device.value;
+     const issue = f.issue.value;
+     const msg = `REPAIR REQUEST — ${SHOP.name}\n\nName: ${name}\nPhone: ${phone}\nDevice: ${device}\nIssue: ${issue}`;
+     window.open(waLink(msg), '_blank');
+    });
+
+    function updateCartUI() {
+     const total = fmt(sumCart());
+     const count = countCart();
+     document.getElementById('cartTotal').textContent = total;
+     document.getElementById('cartCount').textContent = count;
+     document.getElementById('cartCountSm').textContent = count;
+     const itemsDiv = document.getElementById('cartItems');
+     const items = Object.values(cart);
+     itemsDiv.innerHTML = items.length ? items.map(i => `
+     <div class="flex items-center justify-between border rounded-xl p-3">
+        <div>
+         <div class="font-semibold">${i.name}</div>
+         <div class="text-sm text-gray-600">${fmt(i.price)} × ${i.qty}</div>
+        </div>
+       <button onclick="removeFromCart('${i.id}')" class="text-red-600 hover:text-red-800">✕</button>
+      </div>
+    `).join('') : '<div class="text-gray-500 text-sm">Cart is empty.</div>';
+  } 
+
+    // Boot 
+    renderProducts(PRODUCTS);
+    updateCartUI();
+    // reveal on scroll
+    const io = new IntersectionObserver((ents)=>ents.forEach(e=>e.isIntersecting&&e.target.classList.add('show')), {threshold: 0.06});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>
