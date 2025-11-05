@@ -691,23 +691,42 @@
     });
 
     function updateCartUI() {
-     const total = fmt(sumCart());
-     const count = countCart();
-     document.getElementById('cartTotal').textContent = total;
-     document.getElementById('cartCount').textContent = count;
-     document.getElementById('cartCountSm').textContent = count;
-     const itemsDiv = document.getElementById('cartItems');
-     const items = Object.values(cart);
-     itemsDiv.innerHTML = items.length ? items.map(i => `
-     <div class="flex items-center justify-between border rounded-xl p-3">
+      const total = fmt(sumCart());
+      const count = countCart();
+      document.getElementById('cartTotal').textContent = total;
+      document.getElementById('cartCount').textContent = count;
+      document.getElementById('cartCountSm').textContent = count;
+
+      const itemsDiv = document.getElementById('cartItems');
+      const items = Object.values(cart);
+    if (!items.length) {
+        itemsDiv.innerHTML = '<div class="text-gray-500 text-sm">Cart is empty.</div>';
+        return;
+    }
+
+    // Render cart items
+    itemsDiv.innerHTML = items.map(i => `
+      <div class="flex items-center justify-between border rounded-xl p-3 mb-2">
         <div>
-         <div class="font-semibold">${i.name}</div>
-         <div class="text-sm text-gray-600">${fmt(i.price)} × ${i.qty}</div>
+          <div class="font-semibold">${i.name}</div>
+          <div class="text-sm text-gray-600">${fmt(i.price)} × ${i.qty}</div>
         </div>
-       <button onclick="removeFromCart('${i.id}')" class="text-red-600 hover:text-red-800">✕</button>
+        <button data-id="${i.id}" class="removeItem text-red-600 hover:text-red-800">✕</button>
       </div>
-    `).join('') : '<div class="text-gray-500 text-sm">Cart is empty.</div>';
-  } 
+    `).join('');
+
+    // Reattach remove buttons after rendering
+    document.querySelectorAll('.removeItem').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const id = e.target.dataset.id;
+        if (cart[id]) {
+          delete cart[id];
+          saveCart();
+          updateCartUI();
+        }
+      });
+    });
+  }
 
     // Boot 
     renderProducts(PRODUCTS);
@@ -718,6 +737,7 @@
   </script>
 </body>
 </html>
+
 
 
 
